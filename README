@@ -1,4 +1,3 @@
-```
 Release Build.
 Base seed: 1711058936
 Trial count: 10000
@@ -10,4 +9,3 @@ Starting classic.
 Starting modern.
 Classic total: 244668 microseconds. Per run: 24 microseconds.
  Modern total: 656408 microseconds. Per run: 66 microseconds.
-```
