@@ -52,7 +52,7 @@ struct Trial {
 };
 
 static int generate_random_unique_number(unordered_set<int>& already_used, int max);
-static vector<Trial> generate_trials(const vector<MiningSite>& all_mining_sites, long trial_count, int max_mining_site_count, int max_selected_indices_count);
+static vector<Trial> generate_trials(const vector<MiningSite>& all_mining_sites, int trial_count, int max_mining_site_count, int max_selected_indices_count);
 
 static vector<MiningSite> generate_all_mining_sites();
 
@@ -66,12 +66,29 @@ static int rand_at_least_one(int max) {
 }
 
 int main() {
-  const long trial_count = 10000;
+  const int base_seed = time(0);
+  const int trial_count = 10000;
   const int max_mining_site_count = 2000; // 18_000 or so is max, unless you add a word_alpha file with more words
   const int max_selected_indices_count = 200;
 
+  if ( max_selected_indices_count > max_mining_site_count ) {
+    printf("Illegal configuration.\n");
+    return 2;
+  }
+
+#ifdef DEBUG
+  printf("DEBUG BUILD!\n");
+#else
+  printf("Release Build.\n");
+#endif
+
+  printf("Base seed: %d\n", base_seed);
+  printf("Trial count: %d\n", trial_count);
+  printf("Maximum amount of entries in the listbox: %d\n", max_mining_site_count);
+  printf("Maximim amount of selected entries in the listbox: %d\n", max_selected_indices_count);
+
+  srand(base_seed);
   printf("Generating base data.\n");
-  srand(time(0));
   vector<MiningSite> all_mining_sites = generate_all_mining_sites();
   if (all_mining_sites.size() == 0) return 1;
 
@@ -129,9 +146,9 @@ int main() {
 
 
 
-static vector<Trial> generate_trials(const vector<MiningSite>& all_mining_sites, long trial_count, int max_mining_site_count, int max_selected_indices_count) {
+static vector<Trial> generate_trials(const vector<MiningSite>& all_mining_sites, int trial_count, int max_mining_site_count, int max_selected_indices_count) {
   vector<Trial> result;
-  for (long trial_index = 0; trial_index < trial_count; ++trial_index) {
+  for (int trial_index = 0; trial_index < trial_count; ++trial_index) {
 
     Trial trial;
     trial.seed = rand();

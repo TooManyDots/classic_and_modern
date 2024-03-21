@@ -1,0 +1,13 @@
+```
+Release Build.
+Base seed: 1711058936
+Trial count: 10000
+Maximum amount of entries in the listbox: 2000
+Maximim amount of selected entries in the listbox: 200
+Generating base data.
+Generating trials.
+Starting classic.
+Starting modern.
+Classic total: 244668 microseconds. Per run: 24 microseconds.
+ Modern total: 656408 microseconds. Per run: 66 microseconds.
+```
